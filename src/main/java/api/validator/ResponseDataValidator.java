@@ -10,12 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResponseDataValidator {
 
     @Step("Validate List equality")
-    public <T> ResponseDataValidator validateListEquality(List<T> actualContent, List<T> expectedContent) {
+    public <T> void validateListEquality(List<T> actualContent, List<T> expectedContent) {
         assertThat(actualContent)
                 .as(ApiMessageConstants.LIST_VALUE_MESSAGE)
                 .withFailMessage(ApiMessageConstants.EQUALITY_FAIL_MESSAGE, expectedContent, actualContent)
                 .isEqualTo(expectedContent);
-        return this;
     }
 
     @Step("Validate string equality")
@@ -44,10 +43,9 @@ public class ResponseDataValidator {
     }
 
     @Step("Verify that list is empty: {actualList}")
-    public <T> ResponseDataValidator verifyEmptyList(List<T> actualList) {
+    public <T> void verifyEmptyList(List<T> actualList) {
         assertThat(actualList)
                 .withFailMessage(ApiMessageConstants.NOT_EMPTY_COLLECTION_ERROR_MESSAGE, actualList)
                 .isEmpty();
-        return this;
     }
 }

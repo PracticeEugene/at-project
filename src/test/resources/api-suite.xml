@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API suite">
+    <test name="Suite api">
+        <classes>
+            <class name="api.SpellTest"/>
+            <class name="api.WizardTest"/>
+        </classes>
+    </test>
+</suite>

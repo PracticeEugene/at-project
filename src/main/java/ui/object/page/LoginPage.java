@@ -24,9 +24,8 @@ public class LoginPage extends GeneralPage {
     }
 
     @Step("Click on 'Login' button")
-    public LoginPage clickOnLoginButton() {
+    public void clickOnLoginButton() {
         clickOnElement(loginButton);
-        return this;
     }
 
     @Step("Get login error message text")

@@ -9,7 +9,6 @@ import ui.util.uiBeanFactory.UiBeanFactory;
 
 import java.util.List;
 
-import static ui.commom.ShopItems.getItemNames;
 import static ui.util.constans.ValidationConstants.DEFAULT_QUANTITY;
 import static ui.util.constans.ValidationConstants.YOUR_CART_PAGE_TITLE;
 
@@ -24,17 +23,18 @@ public class YourCartPageBO extends ValidationPerformer {
     }
 
     @Step("Verify 'Your cart' added '{items}' items")
-    public YourCartPageBO verifyYourCartItems(List<ShopItems> items) {
-        collectionsValidator.verifyListsEqualityIgnoreOrder(yourCartPage.getItemNames(), ShopItems.getItemNames(ShopItems.getItems()));
+    public void verifyYourCartItems(List<ShopItems> items) {
+        collectionsValidator
+                .verifyListsEqualityIgnoreOrder(yourCartPage.getItemNames(), ShopItems.getItemNames(ShopItems.getItems()));
+
         SoftAssertions softAssertions = new SoftAssertions();
-        items.forEach(item -> {
-            textValidator.validateElementTextEquality(yourCartPage.getYourCartItemPrice(item.getName()),
-                    item.getPrice(), softAssertions);
-            textValidator.validateElementTextEquality(yourCartPage.getYourCartItemQuantity(item.getName()),
-                    DEFAULT_QUANTITY, softAssertions);
-        });
+        items.forEach(item -> textValidator
+                .validateElementTextEquality(yourCartPage.getYourCartItemPrice(item.getName()),
+                        item.getPrice(), softAssertions)
+                .validateElementTextEquality(yourCartPage.getYourCartItemQuantity(item.getName()),
+                        DEFAULT_QUANTITY, softAssertions)
+        );
         softAssertions.assertAll();
-        return this;
     }
 
     @Step("Open 'Checkout: Your Information' page")

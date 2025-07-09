@@ -11,10 +11,9 @@ import static ui.util.constans.UiFailMessageConstants.LISTS_EQUALITY_FAIL_MESSAG
 public final class CollectionsValidator {
 
     @Step("Verify that actual list is equal to expected list ignoring elements order")
-    public <T> CollectionsValidator verifyListsEqualityIgnoreOrder(List<T> actualValues, List<T> expectedValues) {
+    public <T> void verifyListsEqualityIgnoreOrder(List<T> actualValues, List<T> expectedValues) {
         assertThat(actualValues)
                 .withFailMessage(format(LISTS_EQUALITY_FAIL_MESSAGE, actualValues, expectedValues))
                 .containsExactlyInAnyOrderElementsOf(expectedValues);
-        return this;
     }
 }

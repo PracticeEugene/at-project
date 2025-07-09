@@ -6,14 +6,14 @@
 
     <groupId>project</groupId>
     <artifactId>at-project</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <!--Libraries versions-->
     <properties>
-        <java.version>21</java.version>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <selenium.version>4.33.0</selenium.version>
         <testng.version>7.9.0</testng.version>
@@ -103,10 +103,13 @@
                             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         </argLine>
                         <systemPropertyVariables>
-                            <allure.results.directory>
-                                ${project.build.directory}/allure-results
-                            </allure.results.directory>
+                            <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                            <suite>${suite}</suite>
                         </systemPropertyVariables>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>src/test/resources/${suite}</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <testFailureIgnore>true</testFailureIgnore>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -134,4 +137,42 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ui</id>
+            <activation>
+                <property>
+                    <name>type</name>
+                    <value>ui</value>
+                </property>
+            </activation>
+            <properties>
+                <suite>ui-suite.xml</suite>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>api</id>
+            <activation>
+                <property>
+                    <name>type</name>
+                    <value>api</value>
+                </property>
+            </activation>
+            <properties>
+                <suite>api-suite.xml</suite>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>all</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite>regression-suite.xml</suite>
+            </properties>
+        </profile>
+    </profiles>
 </project>

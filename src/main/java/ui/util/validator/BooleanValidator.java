@@ -10,10 +10,9 @@ import static ui.util.retryConfiguration.RetryConfiguration.waitForConditionWith
 public final class BooleanValidator {
 
     @Step("Verify true condition with wait")
-    public BooleanValidator verifyTrueConditionWithWait(BooleanSupplier conditionToVerify, String errorMessage) {
+    public void verifyTrueConditionWithWait(BooleanSupplier conditionToVerify, String errorMessage) {
         assertThat(waitForConditionWithMinDuration(conditionToVerify))
                 .withFailMessage(errorMessage)
                 .isTrue();
-        return this;
     }
 }

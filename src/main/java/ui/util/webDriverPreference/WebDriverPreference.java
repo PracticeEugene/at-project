@@ -13,7 +13,7 @@ public class WebDriverPreference {
 
     private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
-    public static WebDriver setupDriver(String browser) {
+    public static void setupDriver(String browser) {
         WebDriver driver;
         switch (browser.toLowerCase()) {
             case "chrome":
@@ -32,7 +32,6 @@ public class WebDriverPreference {
         }
         driver.manage().window().maximize();
         driverThreadLocal.set(driver);
-        return driver;
     }
 
     public static WebDriver getDriver() {

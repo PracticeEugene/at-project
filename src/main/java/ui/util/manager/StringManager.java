@@ -12,7 +12,7 @@ import static ui.util.constans.CommonFailMessageConstants.REGEX_MISMATCH_EXCEPTI
 
 public final class StringManager {
 
-    protected static Number getFirstMatchFromRegex(String text, String regex) {
+    private static Number getFirstMatchFromRegex(String text, String regex) {
         String errorMessage = format(REGEX_MISMATCH_EXCEPTION_MESSAGE, text, regex);
         Matcher matcher = compile(regex).matcher(text);
         if (matcher.find()) {

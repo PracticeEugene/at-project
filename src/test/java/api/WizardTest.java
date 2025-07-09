@@ -8,19 +8,20 @@ import static api.modal.ApiModels.getWizardModel;
 
 public class WizardTest extends BaseApiTest {
 
-    @Test
+    @Test(description = "Verify search Wizards")
     public void verifyWizardsFieldsPresent() {
         wizardBO.verifyWizardsResponseFieldsPresent();
     }
 
-    @Test
+
+    @Test(description = "Verify search Wizards by ID")
     public void verifyWizardPresentById() {
         wizardBO.verifyWizardResponseFieldsPresentById(getWizardModel())
                 .verifyWizardFieldsValues(getWizardModel())
                 .verifyElixirFieldsValues(getElixirModel());
     }
 
-    @Test
+    @Test(description = "Verify search Wizards with invalid ID")
     public void verifySearchWizardByInvalidId() {
         wizardBO.verifyWizardResponseByInvalidId(getInvalidIdWizardModel());
     }

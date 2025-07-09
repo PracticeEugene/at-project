@@ -23,7 +23,7 @@ public class SpellBO extends ApiGeneralBO {
     }
 
     @Step("Verify Spell fields values by Incantation value: {model.incantation}")
-    public SpellBO verifySpellFieldsValues(ApiModels model) {
+    public void verifySpellFieldsValues(ApiModels model) {
         SpellResponse[] spellResponse = getSpellResponseByIncantation(model);
         stream(spellResponse).forEach(spell -> {
             SoftAssertions softAssertions = new SoftAssertions();
@@ -37,15 +37,13 @@ public class SpellBO extends ApiGeneralBO {
                     .validateStringEquality(spell.getCreator(), model.getCreator());
             softAssertions.assertAll();
         });
-        return this;
     }
 
     @Step("Verify Spell response by invalid Incantation value: {model.incantation}")
-    public SpellBO verifySpellResponseByInvalidIncantationValue(ApiModels model) {
+    public void verifySpellResponseByInvalidIncantationValue(ApiModels model) {
         SpellResponse[] spellResponse = getSpellResponseByIncantation(model);
         stream(spellResponse).forEach(spell -> validatorStorage.responseDataValidator()
                 .verifyEmptyList(getResponseFields(spell)));
-        return this;
     }
 
 
